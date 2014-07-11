@@ -13,6 +13,9 @@ import org.json.JSONObject;
 import com.dsie.labs.bacoAndroidTesting.R;
 import com.mobpartner.android.publisher.views.MobPartnerAdBanner;
 import com.mobpartner.android.publisher.views.MobPartnerAdInterstitial;
+import com.mobpartner.android.publisher.views.MobPartnerMobStream;
+import com.mobpartner.android.publisher.views.MobPartnerMobWall;
+import com.mobpartner.android.publisher.views.MobPartnerMobWidget;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -98,6 +101,16 @@ public class MobPartnerPlugin extends CordovaPlugin {
     					
     				MobPartnerAdInterstitial interstitial = new MobPartnerAdInterstitial(webView.getContext(),poolId);
     				interstitial.show();
+    				
+    				//MobPartnerMobStream  mobstream = new MobPartnerMobStream(webView.getContext(),poolId);
+    				//mobstream.show();
+    				
+    				//MobPartnerMobWall mobwall = new MobPartnerMobWall(webView.getContext(),poolId);
+    				//mobwall.show();
+
+    				//MobPartnerMobWidget mobwidget = new MobPartnerMobWidget(webView.getContext(),poolId);
+    				//mobwidget.showAd();
+    				
     			}
     		};
     		this.cordova.getActivity().runOnUiThread(runnable);
