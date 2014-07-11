@@ -10,11 +10,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dsie.labs.bacoAndroidTesting.R;
 import com.mobpartner.android.publisher.views.MobPartnerAdBanner;
+import com.mobpartner.android.publisher.views.MobPartnerAdInterstitial;
 
 import android.util.Log;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.webkit.WebBackForwardList;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MobPartnerPlugin extends CordovaPlugin {
 	private static final String LOGTAG = "MobPartnerPlugin";
@@ -23,6 +30,8 @@ public class MobPartnerPlugin extends CordovaPlugin {
     private static final String ACTION_SHOW_BANNER = "showBanner";
     private static final String ACTION_SHOW_INTERSTITIAL = "showInterstitial";
     private static final String ACTION_HIDE_BANNER = "hideBanner";
+    
+    private String poolId = "";
 
     @Override
     public boolean execute(String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
@@ -35,6 +44,7 @@ public class MobPartnerPlugin extends CordovaPlugin {
             executeShowBanner(inputs,callbackContext);
             return true;
         } else if (ACTION_SHOW_INTERSTITIAL.equals(action)) {
+        	executeShowInterstitial(inputs, callbackContext);
             //executeRequestAd(inputs, callbackContext);
             return true;
         } else if (ACTION_HIDE_BANNER.equals(action)) {
@@ -48,22 +58,62 @@ public class MobPartnerPlugin extends CordovaPlugin {
     }
 
     private void executeShowBanner(JSONArray inputs, CallbackContext callbackContext) {
-        String poolId = "";
-        String size = "";
-
         // Get the input data.
         try {
-            poolId = inputs.getString(0);
-            
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-            MobPartnerAdBanner banner = new MobPartnerAdBanner(this.webView.getContext(),poolId);
-            banner.setLayoutParams(layoutParams); 
-            banner.show();
+            this.poolId = inputs.getString(0);
+            final CordovaInterface cordova = this.cordova;
 
+    		// Create the AdView on the UI thread.
+    		Log.w(LOGTAG, "createBannerView");
+    		Runnable runnable = new Runnable() {
+    			public void run() {
+    				Log.w(LOGTAG, "ShowBanner:" + poolId);
+    				Log.w(LOGTAG, String.valueOf(webView));
+    					
+    				//LinearLayoutSoftKeyboardDetect parentView = (LinearLayoutSoftKeyboardDetect) webView.getParent();
+    				//LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+    				//layoutParams.gravity = Gravity.BOTTOM;
+
+    				RelativeLayout.LayoutParams layoutParams= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    				layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, webView.getId());
+    				
+    				MobPartnerAdBanner banner = new MobPartnerAdBanner(webView.getContext(),poolId);
+    			    //banner.setLayoutParams(layoutParams);
+    			    cordova.getActivity().addContentView(banner, layoutParams);
+    			    banner.show();
+    			}
+    		};
+    		this.cordova.getActivity().runOnUiThread(runnable);
         } catch (JSONException exception) {
             Log.w(LOGTAG,String.format("Got JSON Exception: %s",exception.getMessage()));
             callbackContext.error(exception.getMessage());
         }
     }
+    
+    private void executeShowInterstitial(JSONArray inputs, CallbackContext callbackContext) {
+        // Get the input data.
+        try {
+            this.poolId = inputs.getString(0);
+            final CordovaInterface cordova = this.cordova;
+
+    		// Create the AdView on the UI thread.
+    		Log.w(LOGTAG, "createInterstitialView");
+    		Runnable runnable = new Runnable() {
+    			public void run() {
+    				Log.w(LOGTAG, "ShowInterstitial:" + poolId);
+    				Log.w(LOGTAG, String.valueOf(webView));
+    					
+    				MobPartnerAdInterstitial interstitial = new MobPartnerAdInterstitial(webView.getContext(),poolId);
+    				interstitial.show();
+    			}
+    		};
+    		this.cordova.getActivity().runOnUiThread(runnable);
+        } catch (JSONException exception) {
+            Log.w(LOGTAG,String.format("Got JSON Exception: %s",exception.getMessage()));
+            callbackContext.error(exception.getMessage());
+        }
+        
+    }
+
 
 }
