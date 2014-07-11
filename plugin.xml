@@ -42,10 +42,11 @@
               <param name="android-package" value="es.dsie.cordova.plugins.mobpartner.MobPartnerPlugin"/>
             </feature>
             
-	      </config-file>
+        </config-file>
 
         <source-file src="src/android/libs/MobPartnerAndroidPublisherSDK3_0.jar" target-dir="libs/"/>
-
+        <source-file src="src/android//banner.xml" target-dir="res/layout"/>
+      
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -67,9 +68,9 @@
     <!-- ios 
     <platform name="ios">
         <feature name="AdController">
-		        <param name="ios-package" value="LBPhonegapPlugin" />
-		        <param name="onload" value="true" />
-	      </feature>
+            <param name="ios-package" value="LBPhonegapPlugin" />
+            <param name="onload" value="true" />
+        </feature>
       
       <header-file src="src/ios/LBHeaders/JSONKit.h" />
       <header-file src="src/ios/LBHeaders/LeadboltOverlay.h" />
