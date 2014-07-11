@@ -70,16 +70,9 @@ public class MobPartnerPlugin extends CordovaPlugin {
     				Log.w(LOGTAG, "ShowBanner:" + poolId);
     				Log.w(LOGTAG, String.valueOf(webView));
     					
-    				//LinearLayoutSoftKeyboardDetect parentView = (LinearLayoutSoftKeyboardDetect) webView.getParent();
-    				//LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-    				//layoutParams.gravity = Gravity.BOTTOM;
-
-    				RelativeLayout.LayoutParams layoutParams= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    				layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, webView.getId());
-    				
+    				LinearLayoutSoftKeyboardDetect parentView = (LinearLayoutSoftKeyboardDetect) webView.getParent();
     				MobPartnerAdBanner banner = new MobPartnerAdBanner(webView.getContext(),poolId);
-    			    //banner.setLayoutParams(layoutParams);
-    			    cordova.getActivity().addContentView(banner, layoutParams);
+					parentView.addView(banner);
     			    banner.show();
     			}
     		};
