@@ -1,4 +1,4 @@
-package com.google.cordova.plugin;
+package es.dsie.cordova.plugins.mobpartner;
 
 import java.util.Iterator;
 
