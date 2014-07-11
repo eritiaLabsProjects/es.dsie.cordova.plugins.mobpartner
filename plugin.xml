@@ -25,7 +25,7 @@
 
     <name>MobPartner</name>
     <author>EritiaLabs</author>
-    <description>Cordova RevMob Plugin</description>
+    <description>Cordova MobPartner Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,ads,MobPartner</keywords>
     <repo></repo>
@@ -41,12 +41,11 @@
             <feature name="MobPartnerPlugin">
               <param name="android-package" value="es.dsie.cordova.plugins.mobpartner.MobPartnerPlugin"/>
             </feature>
-            
         </config-file>
 
-        <source-file src="src/android/src/es/dsie/cordova/plugins/mobpartner/MobPartnerPlugin.java" target-dir="src/"/>
+        <source-file src="src/android/es/dsie/cordova/plugins/mobpartner/MobPartnerPlugin.java" target-dir="src/"/>
         <source-file src="src/android/libs/MobPartnerAndroidPublisherSDK3_0.jar" target-dir="libs/"/>
-        <source-file src="src/android//banner.xml" target-dir="res/layout"/>
+        
       
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -54,16 +53,7 @@
             <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
         </config-file>
-        
-        
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-             <activity android:name="com.revmob.ads.fullscreen.FullscreenActivity"
-                       android:theme="@android:style/Theme.Translucent"
-                       android:configChanges="keyboardHidden|orientation">
-             </activity>
-        </config-file>
-        
-        
+
     </platform>
 
     <!-- ios 
