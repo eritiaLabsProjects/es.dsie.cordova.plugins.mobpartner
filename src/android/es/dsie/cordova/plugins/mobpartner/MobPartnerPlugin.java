@@ -13,8 +13,12 @@ import org.json.JSONObject;
 import com.mobpartner.android.publisher.views.MobPartnerAdBanner;
 
 import android.util.Log;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class MobPartnerPlugin extends CordovaPlugin {
+	private static final String LOGTAG = "MobPartnerPlugin";
+	
     private static final String ACTION_INIT = "init";
     private static final String ACTION_SHOW_BANNER = "showBanner";
     private static final String ACTION_SHOW_INTERSTITIAL = "showInterstitial";
@@ -24,7 +28,7 @@ public class MobPartnerPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray inputs, CallbackContext callbackContext) throws JSONException {
         if (ACTION_INIT.equals(action)) {
             //executeCreateBannerView(inputs, callbackContext);
-            executeInit(inputs,callbackContext);
+            //executeInit(inputs,callbackContext);
             return true;
         } else if (ACTION_SHOW_BANNER.equals(action)) {
             //executeCreateInterstitialView(inputs, callbackContext);
@@ -52,7 +56,7 @@ public class MobPartnerPlugin extends CordovaPlugin {
             poolId = inputs.getString(0);
             
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-            banner = new MobPartnerAdBanner(this, poolId);
+            MobPartnerAdBanner banner = new MobPartnerAdBanner(this.webView.getContext(),poolId);
             banner.setLayoutParams(layoutParams); 
             banner.show();
 

@@ -43,7 +43,7 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/es/dsie/cordova/plugins/mobpartner/MobPartnerPlugin.java" target-dir="src/"/>
+        <source-file src="src/android/es/dsie/cordova/plugins/mobpartner/MobPartnerPlugin.java" target-dir="src/es/dsie/cordova/plugins/mobpartner/"/>
         <source-file src="src/android/libs/MobPartnerAndroidPublisherSDK3_0.jar" target-dir="libs/"/>
         
       
