@@ -1,30 +1,16 @@
 package es.dsie.cordova.plugins.mobpartner;
 
-import java.util.Iterator;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.LinearLayoutSoftKeyboardDetect;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.dsie.labs.bacoAndroidTesting.R;
-import com.mobpartner.android.publisher.views.MobPartnerAdBanner;
-import com.mobpartner.android.publisher.views.MobPartnerAdInterstitial;
-import com.mobpartner.android.publisher.views.MobPartnerMobStream;
-import com.mobpartner.android.publisher.views.MobPartnerMobWall;
-import com.mobpartner.android.publisher.views.MobPartnerMobWidget;
 
 import android.util.Log;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
-import android.webkit.WebBackForwardList;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
+import com.mobpartner.android.publisher.views.MobPartnerAdBanner;
+import com.mobpartner.android.publisher.views.MobPartnerAdInterstitial;
 
 public class MobPartnerPlugin extends CordovaPlugin {
 	private static final String LOGTAG = "MobPartnerPlugin";
